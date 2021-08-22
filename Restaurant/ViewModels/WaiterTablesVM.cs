@@ -91,13 +91,18 @@ namespace Restaurant.ViewModels
         public void OpenWindow(object obj)
         {
             TableVM table = obj as TableVM;
+            if(table is null)
+            {
+                MessageBox.Show("You need to select a table!");
+                return;
+            }
             if (table.NoOfSeatsOccupied == 0)
             {
                 MessageBox.Show("There aren't any people at the table!");
                 return;
             }
             var ticket = ticketAct.GetLastTicketForTable(table.Id);
-            if (ticket is null && ticket?.IdType != 2)
+            if (ticket is null || ticket?.IdType != 2)
             {
                 ticketAct.AddMethod(User.Id, table.Id);
                 ticket = ticketAct.GetLastTicketForTable(table.Id);

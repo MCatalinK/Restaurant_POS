@@ -80,7 +80,7 @@
                 Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=orderGrid,Path=SelectedItem,UpdateSourceTrigger=PropertyChanged}"></Button>
 
         <Button Grid.Row="4" FontSize="16" Grid.Column="0" x:Name="btnPay" Width="100" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Content="Pay"
-                Command="{Binding PayCommand}" CommandParameter="{Binding ElementName=Id,Path=Text}">
+                Command="{Binding PayCommand}" CommandParameter="{Binding ElementName=Id,Path=Text}" Click="btnPay_Click">
         </Button>
 
         <Button Grid.Row="7" FontSize="16" Grid.ColumnSpan="3" x:Name="btnBack" Width="100" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Content="Back"

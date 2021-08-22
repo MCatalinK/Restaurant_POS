@@ -25,5 +25,10 @@ namespace Restaurant.Views.WaiterViews
             InitializeComponent();
             this.DataContext = ticketVM;
         }
+
+        private void btnPay_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

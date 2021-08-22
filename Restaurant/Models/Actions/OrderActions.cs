@@ -76,7 +76,6 @@ namespace Restaurant.Models.Actions
                 });
             }
             return result;
-        }
-       
+        } 
     }
 }

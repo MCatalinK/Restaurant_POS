@@ -42,11 +42,25 @@ namespace Restaurant.Models.Actions
         public void UpdateMethod(object obj)
         {
             TableVM tableVM = obj as TableVM;
-            if (tableVM is null) MessageBox.Show("No table selected!");
+            if (tableVM is null)
+            {
+                MessageBox.Show("No table selected!");
+                return;
+            }
             var table = ctx.Tables.Where(p => p.id == tableVM.Id).FirstOrDefault();
-            if (table is null) MessageBox.Show("The table couldn't be found!");
+            if (table is null)
+            {
+                MessageBox.Show("The table couldn't be found!");
+                return;
+            }
+            if(tableVM.NoOfSeatsOccupied>table.noOfSeats)
+            {
+                MessageBox.Show("Not enough sits to seat everyone!");
+                return;
+            }
             table.noOfSeats = tableVM.NoOfSeats;
             table.noOfSeatsOccupied = tableVM.NoOfSeatsOccupied;
+            
             table.userId = tableVM.UserId;
             ctx.SaveChanges();
             if (tableCtx != null)
@@ -58,9 +72,15 @@ namespace Restaurant.Models.Actions
         {
 
             TableVM tableVM = obj as TableVM;
-            if (tableVM is null) MessageBox.Show("No table selected!");
+            if (tableVM is null) {
+                MessageBox.Show("No table selected!");
+                return;
+            }
             var table = ctx.Tables.Where(p => p.id == tableVM.Id).FirstOrDefault();
-            if (table is null) MessageBox.Show("The table couldn't be found!");
+            if (table is null) {
+                MessageBox.Show("The table couldn't be found!");
+                return;
+            }
             ctx.Tables.Remove(table);
             ctx.SaveChanges();
             if (tableCtx != null)

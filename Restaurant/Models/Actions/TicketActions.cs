@@ -71,6 +71,12 @@ namespace Restaurant.Models.Actions
                 MessageBox.Show("No ticket found!");
                 return;
             }
+            if(ticket.idType==1)
+            {
+                MessageBox.Show("Ticket already payed!");
+                return;
+
+            }
             var table = ctx.Tables.Where(p => p.id == ticket.idTable).FirstOrDefault();
             table.noOfSeatsOccupied = 0;
             ticket.idType = 1;
@@ -247,12 +253,12 @@ namespace Restaurant.Models.Actions
                 IdUser = ticketSum.FirstOrDefault().Id,
                 Total = (decimal)ticketSum.FirstOrDefault().Sum
             });
-            result.Add(new MonthlyReportVM()
-            {
-                IdUser = ticketSum.LastOrDefault().Id,
-                Total = (decimal)ticketSum.LastOrDefault().Sum
-            });
-
+            if(ticketSum.FirstOrDefault().Id!= ticketSum.LastOrDefault().Id)
+                result.Add(new MonthlyReportVM()
+                {
+                    IdUser = ticketSum.LastOrDefault().Id,
+                    Total = (decimal)ticketSum.LastOrDefault().Sum
+                });
 
             return result;
         }
